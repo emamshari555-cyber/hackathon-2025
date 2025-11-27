@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Public Hackathon 2025</title>
+  <title>Public JavaScript Hackathon 2025</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -16,6 +16,29 @@
       justify-content: center;
       padding: 24px;
     }
+    a { color: inherit; }
+
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      padding: 10px 24px;
+      background: rgba(15,23,42,0.95);
+      border-bottom: 1px solid rgba(148,163,184,0.4);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
+    .nav-left { font-weight: 600; font-size: 14px; }
+    .nav-links a {
+      font-size: 13px;
+      margin-left: 12px;
+      text-decoration: none;
+      color: #e5e7eb;
+      opacity: 0.8;
+    }
+    .nav-links a:hover { opacity: 1; }
+
     .shell {
       width: 100%;
       max-width: 1100px;
@@ -23,12 +46,13 @@
       border-radius: 24px;
       border: 1px solid rgba(148,163,184,0.3);
       box-shadow: 0 30px 80px rgba(15,23,42,0.8);
-      padding: 28px 24px;
+      padding: 72px 24px 28px;
       display: grid;
       gap: 28px;
+      margin-top: 20px;
     }
     @media (min-width: 900px) {
-      .shell { grid-template-columns: 2fr 1.5fr; padding: 40px 36px; }
+      .shell { grid-template-columns: 2fr 1.5fr; padding: 80px 36px 36px; }
     }
     .badge {
       display: inline-flex;
@@ -99,6 +123,7 @@
       border: 1px solid rgba(148,163,184,0.5);
     }
     .btn-secondary:hover { background: rgba(15,23,42,0.9); }
+
     .section-title {
       font-size: 14px;
       letter-spacing: 0.08em;
@@ -169,14 +194,26 @@
   </style>
 </head>
 <body>
+  <nav class="nav">
+    <div class="nav-left">JS Hackathon 2025</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="registration.html">Register</a>
+      <a href="problems.html">Problems</a>
+      <a href="code.html">Playground</a>
+      <a href="submit.html">Submit</a>
+      <a href="results.html">Results</a>
+    </div>
+  </nav>
+
   <main class="shell">
     <!-- LEFT SIDE -->
     <section>
-      <div class="badge"><span></span> LIVE • Online Hackathon</div>
-      <h1>Public Hackathon 2025</h1>
+      <div class="badge"><span></span> LIVE • Online JavaScript Hackathon</div>
+      <h1>Public JavaScript Hackathon 2025</h1>
       <p class="subtitle">
-        Build impactful projects in 1 day. Collaborate, innovate, and showcase your skills
-        to mentors and recruiters.
+        Build innovative JS-based projects in 1 day. Solve real-world problems, sharpen your logic,
+        and showcase your skills to industry mentors.
       </p>
 
       <div class="meta-row">
@@ -187,7 +224,7 @@
 
       <div class="btn-row">
         <a href="registration.html" class="btn btn-primary">Register Now</a>
-        <a href="submit.html" class="btn btn-secondary">Submit Project</a>
+        <a href="problems.html" class="btn btn-secondary">View Problems</a>
         <a href="code.html" class="btn btn-secondary">Code Playground</a>
       </div>
 
@@ -195,7 +232,7 @@
         <div class="section-title">Timeline</div>
         <ul class="timeline">
           <li><span>Kickoff:</span> 10:00 AM – Problem statements released</li>
-          <li><span>Build:</span> 10:00 AM – 8:00 PM – Project development</li>
+          <li><span>Build:</span> 10:00 AM – 8:00 PM – Coding & project development</li>
           <li><span>Submission:</span> by 8:00 PM via online portal</li>
           <li><span>Results:</span> Next day, 6:00 PM – winners announced</li>
         </ul>
@@ -204,10 +241,10 @@
       <div style="margin-top:18px;">
         <div class="section-title">Rules & Expectations</div>
         <ul class="info-list">
-          <li>✔ Original work only (no fully pre-built templates).</li>
+          <li>✔ Original work only (no copy–paste from GitHub).</li>
           <li>✔ Teams up to 3 members allowed.</li>
-          <li>✔ Use any tech stack you like.</li>
-          <li>✔ You must submit code + short description to be eligible.</li>
+          <li>✔ JavaScript must be the primary language (browser or Node style logic).</li>
+          <li>✔ Code + explanation must be submitted to be eligible.</li>
         </ul>
       </div>
     </section>
@@ -218,7 +255,7 @@
       <div class="stat-row">
         <div class="stat">
           <div class="value">🎓</div>
-          <div class="label">Experience Certificate</div>
+          <div class="label">Participation Certificate</div>
         </div>
         <div class="stat">
           <div class="value">🏆</div>
@@ -226,25 +263,25 @@
         </div>
         <div class="stat">
           <div class="value">🤝</div>
-          <div class="label">Networking & Mentorship</div>
+          <div class="label">Networking & Mentoring</div>
         </div>
       </div>
       <p style="font-size:13px;color:#d1d5db;">
-        Submissions are judged on innovation, impact, technical quality,
-        and clarity of presentation. Shortlisted teams may be invited
-        for a live demo session.
+        Submissions are judged on clean code, correct output, problem-solving approach,
+        and clarity of explanation. Shortlisted teams may present their solution live.
       </p>
       <div class="tag-row">
-        <div class="tag">Web & Mobile</div>
-        <div class="tag">AI / ML</div>
-        <div class="tag">Automation</div>
-        <div class="tag">Cyber / Cloud</div>
+        <div class="tag">Algorithms</div>
+        <div class="tag">Data Structures</div>
+        <div class="tag">Async JS</div>
+        <div class="tag">Browser APIs</div>
       </div>
 
       <footer>
-        Hosted by CGS • Need help? Mail us at emamsharif587@gmail.com
+        Hosted by CGS • Need help? Mail us at youremail@example.com
       </footer>
     </aside>
   </main>
 </body>
 </html>
+
