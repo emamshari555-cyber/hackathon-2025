@@ -1,110 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Public Hackathon 2025</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1d4ed8, #020617);
+      color: #e5e7eb;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .shell {
+      width: 100%;
+      max-width: 1100px;
+      background: rgba(15,23,42,0.9);
+      border-radius: 24px;
+      border: 1px solid rgba(148,163,184,0.3);
+      box-shadow: 0 30px 80px rgba(15,23,42,0.8);
+      padding: 28px 24px;
+      display: grid;
+      gap: 28px;
+    }
+    @media (min-width: 900px) {
+      .shell { grid-template-columns: 2fr 1.5fr; padding: 40px 36px; }
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(56,189,248,0.1);
+      color: #7dd3fc;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+    .badge span {
+      width: 6px; height: 6px; border-radius: 999px;
+      background: #22c55e;
+    }
+    h1 {
+      font-size: clamp(28px, 4vw, 38px);
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+    .subtitle {
+      font-size: 14px;
+      color: #9ca3af;
+      max-width: 480px;
+      margin-bottom: 24px;
+    }
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .pill {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.5);
+      font-size: 12px;
+      color: #e5e7eb;
+    }
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .btn {
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(to right, #4f46e5, #06b6d4);
+      color: white;
+      box-shadow: 0 10px 30px rgba(37,99,235,0.6);
+    }
+    .btn-primary:hover { transform: translateY(-1px); opacity: 0.95; }
+    .btn-secondary {
+      background: transparent;
+      color: #e5e7eb;
+      border: 1px solid rgba(148,163,184,0.5);
+    }
+    .btn-secondary:hover { background: rgba(15,23,42,0.9); }
+    .section-title {
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      margin-bottom: 10px;
+    }
+    .timeline, .info-list { list-style: none; font-size: 13px; color: #9ca3af; }
+    .timeline li, .info-list li { margin-bottom: 8px; }
+    .timeline span {
+      font-weight: 600;
+      color: #e5e7eb;
+      margin-right: 6px;
+    }
+    .right-card {
+      background: radial-gradient(circle at top left, rgba(59,130,246,0.22), transparent),
+                  radial-gradient(circle at bottom right, rgba(8,47,73,0.7), #020617);
+      border-radius: 18px;
+      border: 1px solid rgba(148,163,184,0.4);
+      padding: 18px 18px 22px;
+    }
+    .right-card h2 {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+    .stat {
+      flex: 1 1 80px;
+      min-width: 90px;
+      padding: 10px;
+      border-radius: 14px;
+      background: rgba(15,23,42,0.85);
+      border: 1px solid rgba(148,163,184,0.4);
+      text-align: center;
+    }
+    .stat .value {
+      font-size: 18px;
+      font-weight: 700;
+      color: #a5b4fc;
+    }
+    .stat .label {
+      font-size: 11px;
+      color: #9ca3af;
+    }
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+    }
+    .tag {
+      padding: 3px 8px;
+      font-size: 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      color: #e5e7eb;
+    }
+    footer {
+      margin-top: 18px;
+      font-size: 11px;
+      color: #6b7280;
+    }
+  </style>
+</head>
 <body>
-  <div class="box">
-    <h1>Public Hackathon 2025</h1>
-    <p><b>Date:</b> Tomorrow</p>
-    <p><b>Mode:</b> Online</p>
-    <p><b>Eligibility:</b> Open to all</p>
-
-    <h3>About Hackathon</h3>
-    <p>Build an innovative project and submit your solution to compete with other participants.</p>
-
-    <h3>Rules</h3>
-    <ul>
-      <li>Project must be original.</li>
-      <li>Teams allowed (max 3 members).</li>
-      <li>Submission deadline: Tomorrow night.</li>
-    </ul>
-
-    <h3>Submit Your Project</h3>
-    <form id="submissionForm">
-      <p><b>Participant Name</b><br />
-        <input type="text" id="name" required />
+  <main class="shell">
+    <!-- LEFT SIDE -->
+    <section>
+      <div class="badge"><span></span> LIVE • Online Hackathon</div>
+      <h1>Public Hackathon 2025</h1>
+      <p class="subtitle">
+        Build impactful projects in 1 day. Collaborate, innovate, and showcase your skills
+        to mentors and recruiters.
       </p>
 
-      <p><b>Email</b><br />
-        <input type="email" id="email" required />
+      <div class="meta-row">
+        <div class="pill">📅 Tomorrow – 1 Day Sprint</div>
+        <div class="pill">🌐 Online</div>
+        <div class="pill">👥 Open to All</div>
+      </div>
+
+      <div class="btn-row">
+        <a href="registration.html" class="btn btn-primary">Register Now</a>
+        <a href="submit.html" class="btn btn-secondary">Submit Project</a>
+        <a href="code.html" class="btn btn-secondary">Code Playground</a>
+      </div>
+
+      <div style="margin-top:24px;">
+        <div class="section-title">Timeline</div>
+        <ul class="timeline">
+          <li><span>Kickoff:</span> 10:00 AM – Problem statements released</li>
+          <li><span>Build:</span> 10:00 AM – 8:00 PM – Project development</li>
+          <li><span>Submission:</span> by 8:00 PM via online portal</li>
+          <li><span>Results:</span> Next day, 6:00 PM – winners announced</li>
+        </ul>
+      </div>
+
+      <div style="margin-top:18px;">
+        <div class="section-title">Rules & Expectations</div>
+        <ul class="info-list">
+          <li>✔ Original work only (no fully pre-built templates).</li>
+          <li>✔ Teams up to 3 members allowed.</li>
+          <li>✔ Use any tech stack you like.</li>
+          <li>✔ You must submit code + short description to be eligible.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- RIGHT SIDE -->
+    <aside class="right-card">
+      <h2>What You’ll Gain</h2>
+      <div class="stat-row">
+        <div class="stat">
+          <div class="value">🎓</div>
+          <div class="label">Experience Certificate</div>
+        </div>
+        <div class="stat">
+          <div class="value">🏆</div>
+          <div class="label">Top Team Recognition</div>
+        </div>
+        <div class="stat">
+          <div class="value">🤝</div>
+          <div class="label">Networking & Mentorship</div>
+        </div>
+      </div>
+      <p style="font-size:13px;color:#d1d5db;">
+        Submissions are judged on innovation, impact, technical quality,
+        and clarity of presentation. Shortlisted teams may be invited
+        for a live demo session.
       </p>
+      <div class="tag-row">
+        <div class="tag">Web & Mobile</div>
+        <div class="tag">AI / ML</div>
+        <div class="tag">Automation</div>
+        <div class="tag">Cyber / Cloud</div>
+      </div>
 
-      <p><b>College / Organization</b><br />
-        <input type="text" id="college" required />
-      </p>
-
-      <p><b>Project Title</b><br />
-        <input type="text" id="projectTitle" required />
-      </p>
-
-      <p><b>GitHub / Code Link</b><br />
-        <input type="url" id="codeLink" required />
-      </p>
-
-      <p><b>Demo Video / Live Link</b><br />
-        <input type="url" id="demoLink" />
-      </p>
-
-      <p><b>Short Description</b><br />
-        <textarea id="description" rows="4" required></textarea>
-      </p>
-
-      <button type="submit" class="btn">Submit Project</button>
-    </form>
-
-    <p id="statusMessage"></p>
-
-    <h3>Contact</h3>
-    <p>Email: your@email.com</p>
-  </div>
-
-  <!-- Firebase + submission script goes here -->
-  <script type="module">
-    // Import Firebase SDKs
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-    import {
-      getFirestore,
-      collection,
-      addDoc
-    } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
-
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyCVx-gsOca_oPxPhAwqU6-v_OXa7uqgEhY",
-      authDomain: "hackathon-2025-64a07.firebaseapp.com",
-      projectId: "hackathon-2025-64a07",
-      storageBucket: "hackathon-2025-64a07.firebasestorage.app",
-      messagingSenderId: "21324756214",
-      appId: "1:21324756214:web:2ba8ecf64544031650a8d7",
-      measurementId: "G-QP9EZ6PX1P"
-    };
-
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-    const form = document.getElementById("submissionForm");
-    const statusMessage = document.getElementById("statusMessage");
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      statusMessage.textContent = "Submitting...";
-      
-      const data = {
-        name: document.getElementById("name").value,
-        email: document.getElementById("email").value,
-        college: document.getElementById("college").value,
-        projectTitle: document.getElementById("projectTitle").value,
-        codeLink: document.getElementById("codeLink").value,
-        demoLink: document.getElementById("demoLink").value,
-        description: document.getElementById("description").value,
-        submittedAt: new Date().toISOString()
-      };
-
-      try {
-        await addDoc(collection(db, "submissions"), data);
-        statusMessage.textContent = "✅ Submission received! Thank you.";
-        form.reset();
-      } catch (error) {
-        console.error(error);
-        statusMessage.textContent = "❌ Error submitting. Please try again.";
-      }
-    });
-  </script>
+      <footer>
+        Hosted by CGS • Need help? Mail us at emamsharif587@gmail.com
+      </footer>
+    </aside>
+  </main>
 </body>
+</html>
