@@ -1,14 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Public Hackathon 2025</title>
-  <style>
-    body { font-family: Arial; background: #f2f6ff; padding: 30px; }
-    .box { background: white; padding: 20px; border-radius: 8px; max-width: 700px; margin: auto; }
-    h1 { color: #333; }
-    .btn { background: #007bff; color: white; padding: 10px; border-radius: 5px; text-decoration: none; display: inline-block; }
-  </style>
-</head>
 <body>
   <div class="box">
     <h1>Public Hackathon 2025</h1>
@@ -21,16 +10,101 @@
 
     <h3>Rules</h3>
     <ul>
-      <li>Project must be original</li>
-      <li>Teams allowed (max 3)</li>
-      <li>Submission deadline: Tomorrow night</li>
+      <li>Project must be original.</li>
+      <li>Teams allowed (max 3 members).</li>
+      <li>Submission deadline: Tomorrow night.</li>
     </ul>
 
-    <h3>Register & Submit</h3>
-    <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLScHoZ13fC2Qy7D8zLWl7h0OsZds45DKyPx_nntOo4CqnenuMw/viewform?usp=publish-editor">Register Now</a>
+    <h3>Submit Your Project</h3>
+    <form id="submissionForm">
+      <p><b>Participant Name</b><br />
+        <input type="text" id="name" required />
+      </p>
+
+      <p><b>Email</b><br />
+        <input type="email" id="email" required />
+      </p>
+
+      <p><b>College / Organization</b><br />
+        <input type="text" id="college" required />
+      </p>
+
+      <p><b>Project Title</b><br />
+        <input type="text" id="projectTitle" required />
+      </p>
+
+      <p><b>GitHub / Code Link</b><br />
+        <input type="url" id="codeLink" required />
+      </p>
+
+      <p><b>Demo Video / Live Link</b><br />
+        <input type="url" id="demoLink" />
+      </p>
+
+      <p><b>Short Description</b><br />
+        <textarea id="description" rows="4" required></textarea>
+      </p>
+
+      <button type="submit" class="btn">Submit Project</button>
+    </form>
+
+    <p id="statusMessage"></p>
 
     <h3>Contact</h3>
     <p>Email: your@email.com</p>
   </div>
+
+  <!-- Firebase + submission script goes here -->
+  <script type="module">
+    // Import Firebase SDKs
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+    import {
+      getFirestore,
+      collection,
+      addDoc
+    } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCVx-gsOca_oPxPhAwqU6-v_OXa7uqgEhY",
+      authDomain: "hackathon-2025-64a07.firebaseapp.com",
+      projectId: "hackathon-2025-64a07",
+      storageBucket: "hackathon-2025-64a07.firebasestorage.app",
+      messagingSenderId: "21324756214",
+      appId: "1:21324756214:web:2ba8ecf64544031650a8d7",
+      measurementId: "G-QP9EZ6PX1P"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const form = document.getElementById("submissionForm");
+    const statusMessage = document.getElementById("statusMessage");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      statusMessage.textContent = "Submitting...";
+      
+      const data = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        college: document.getElementById("college").value,
+        projectTitle: document.getElementById("projectTitle").value,
+        codeLink: document.getElementById("codeLink").value,
+        demoLink: document.getElementById("demoLink").value,
+        description: document.getElementById("description").value,
+        submittedAt: new Date().toISOString()
+      };
+
+      try {
+        await addDoc(collection(db, "submissions"), data);
+        statusMessage.textContent = "✅ Submission received! Thank you.";
+        form.reset();
+      } catch (error) {
+        console.error(error);
+        statusMessage.textContent = "❌ Error submitting. Please try again.";
+      }
+    });
+  </script>
 </body>
-</html>
