@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin – Submissions Viewer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body { background:#020617; color:#e5e7eb; font-family:system-ui, sans-serif; padding:24px; }
+    h1 { text-align:center; margin-bottom:10px; color:#38bdf8; }
+    table { width:100%; border-collapse:collapse; font-size:12px; }
+    th, td { border:1px solid #1f2937; padding:6px; vertical-align:top; }
+    th { background:#0f172a; }
+    a { color:#38bdf8; }
+  </style>
+</head>
+<body>
+  <h1>All Project Submissions (Admin)</h1>
+  <p style="text-align:center;font-size:13px;color:#9ca3af;">This page is not protected, so keep the link private.</p>
+
+  <table id="submissionsTable">
+    <thead>
+      <tr>
+        <th>Team</th>
+        <th>Leader</th>
+        <th>Email</th>
+        <th>College</th>
+        <th>Title</th>
+        <th>Code</th>
+        <th>Demo</th>
+        <th>Description</th>
+        <th>Tech</th>
+        <th>Submitted</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+    import {
+      getFirestore,
+      collection,
+      getDocs
+    } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCVx-gsOca_oPxPhAwqU6-v_OXa7uqgEhY",
+      authDomain: "hackathon-2025-64a07.firebaseapp.com",
+      projectId: "hackathon-2025-64a07",
+      storageBucket: "hackathon-2025-64a07.firebasestorage.app",
+      messagingSenderId: "21324756214",
+      appId: "1:21324756214:web:2ba8ecf64544031650a8d7",
+      measurementId: "G-QP9EZ6PX1P"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const tbody = document.querySelector("#submissionsTable tbody");
+
+    async function loadSubmissions() {
+      const qs = await getDocs(collection(db, "submissions"));
+      tbody.innerHTML = "";
+      qs.forEach(doc => {
+        const d = doc.data();
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${d.teamName || ""}</td>
+          <td>${d.leaderName || ""}</td>
+          <td>${d.email || ""}</td>
+          <td>${d.college || ""}</td>
+          <td>${d.projectTitle || ""}</td>
+          <td>${d.codeLink ? `<a href="${d.codeLink}" target="_blank">Code</a>` : ""}</td>
+          <td>${d.demoLink ? `<a href="${d.demoLink}" target="_blank">Demo</a>` : ""}</td>
+          <td>${d.description || ""}</td>
+          <td>${d.techStack || ""}</td>
+          <td>${d.submittedAt || ""}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    loadSubmissions();
+  </script>
+</body>
+</html>
