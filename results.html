@@ -1,22 +1,86 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Results</title>
-<style>
-body { background:black; color:white; font-family:Arial; }
-table { width:80%; margin:auto; border-collapse:collapse; }
-td, th { border:1px solid white; padding:8px; }
-</style>
+  <meta charset="UTF-8" />
+  <title>JS Hackathon 2025 – Results</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body { background:#020617; color:#e5e7eb; font-family:system-ui, sans-serif; padding:24px; }
+    .nav {
+      padding: 10px 24px;
+      background: rgba(15,23,42,0.95);
+      border-bottom: 1px solid rgba(148,163,184,0.4);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: -24px -24px 24px;
+    }
+    .nav-links a { margin-left: 12px; font-size:13px; opacity:0.8; color:#e5e7eb; text-decoration:none; }
+    .nav-links a:hover { opacity:1; }
+    h1 { text-align:center; color:#38bdf8; margin-bottom:10px; }
+    p { text-align:center; color:#9ca3af; font-size:14px; margin-bottom:18px; }
+    table {
+      width: 100%; max-width: 800px; margin: 0 auto;
+      border-collapse: collapse; background:#020617;
+      border-radius:16px; overflow:hidden; border:1px solid #1f2937;
+    }
+    th, td {
+      padding:10px;
+      border-bottom:1px solid #1f2937;
+      font-size:13px;
+      text-align:left;
+    }
+    th { background:#0f172a; }
+    tr:nth-child(even) { background:#020617; }
+    tr:nth-child(odd) { background:#020617; }
+  </style>
 </head>
 <body>
+  <nav class="nav">
+    <div>JS Hackathon 2025</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="registration.html">Register</a>
+      <a href="problems.html">Problems</a>
+      <a href="code.html">Playground</a>
+      <a href="submit.html">Submit</a>
+      <a href="results.html">Results</a>
+    </div>
+  </nav>
 
-<h1 align="center">Hackathon Winners</h1>
+  <h1>Results & Leaderboard</h1>
+  <p>Update this table after judging to display winners.</p>
 
-<table>
-<tr><th>Rank</th><th>Name</th><th>Score</th></tr>
-<tr><td>1</td><td>Winner Name</td><td>95</td></tr>
-<tr><td>2</td><td>Runner</td><td>89</td></tr>
-</table>
-
+  <table>
+    <thead>
+      <tr>
+        <th>Rank</th>
+        <th>Team Name</th>
+        <th>Project Title</th>
+        <th>Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Edit these rows manually after judging -->
+      <tr>
+        <td>1</td>
+        <td>Team Alpha</td>
+        <td>Smart JS Analyzer</td>
+        <td>96</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Code Ninjas</td>
+        <td>Async API Dashboard</td>
+        <td>91</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Byte Squad</td>
+        <td>Visualizer for JS Algorithms</td>
+        <td>88</td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>
