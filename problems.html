@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>JavaScript Hackathon Problems</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body { background:#020617; color:#e5e7eb; font-family:system-ui, sans-serif; padding:24px; }
+    a { color:#38bdf8; text-decoration:none; }
+    .nav {
+      padding: 10px 24px;
+      background: rgba(15,23,42,0.95);
+      border-bottom: 1px solid rgba(148,163,184,0.4);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: -24px -24px 24px;
+    }
+    .nav-links a { margin-left: 12px; font-size:13px; opacity:0.8; }
+    .nav-links a:hover { opacity:1; }
+    .box { max-width: 900px; margin: 0 auto; background:#020617; padding:20px; border-radius:16px; border:1px solid #1f2937; }
+    h1 { color:#38bdf8; margin-bottom:10px; }
+    h2 { margin-top:18px; color:#e5e7eb; }
+    pre {
+      background:#000000;
+      padding:10px;
+      color:#22c55e;
+      border-radius:6px;
+      overflow-x:auto;
+      font-size:13px;
+    }
+    p { font-size:14px; color:#d1d5db; margin:4px 0 6px; }
+    .note { font-size:13px; color:#9ca3af; margin-top:8px; }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div>JS Hackathon 2025</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="registration.html">Register</a>
+      <a href="problems.html">Problems</a>
+      <a href="code.html">Playground</a>
+      <a href="submit.html">Submit</a>
+      <a href="results.html">Results</a>
+    </div>
+  </nav>
+
+  <div class="box">
+    <h1>JavaScript Problem Set</h1>
+    <p class="note">
+      You can use these problems as part of your project or as standalone coding tasks.
+      Try solving them in the <a href="code.html">Online Code Playground</a>.
+    </p>
+
+    <h2>Problem 1: Unique Values Counter</h2>
+    <p>
+      Given an array of numbers, return the number of <b>unique</b> values.
+    </p>
+    <p><b>Example:</b></p>
+    <pre>
+// Input:
+[1, 2, 3, 2, 4, 3, 5]
+
+// Output:
+5
+    </pre>
+    <p class="note">Hint: You can use a Set in JavaScript.</p>
+
+    <h2>Problem 2: Student Topper</h2>
+    <p>
+      You are given an array of student objects, each having <code>name</code> and <code>marks</code>.<br />
+      Return the <b>name of the student</b> who has the highest marks.
+    </p>
+    <pre>
+// Input:
+[
+  { name: "Arjun", marks: 78 },
+  { name: "Bhavya", marks: 92 },
+  { name: "Chitra", marks: 85 }
+]
+
+// Output:
+"Bhavya"
+    </pre>
+
+    <h2>Problem 3: String Compression</h2>
+    <p>
+      Given a string consisting of lowercase letters, compress it by replacing each group of
+      repeating characters with the character followed by the count of repetitions.
+    </p>
+    <p><b>Example:</b></p>
+    <pre>
+// Input:
+"aaabbc"
+
+// Output:
+"a3b2c1"
+    </pre>
+
+    <h2>Problem 4: Async Fetch Wrapper (Advanced)</h2>
+    <p>
+      Write an async function <code>fetchJson(url)</code> that:
+      <br />• fetches data from the given URL<br />
+      • returns parsed JSON on success<br />
+      • throws an error with message <code>"Request failed"</code> if response is not ok
+    </p>
+    <pre>
+// Example usage:
+fetchJson("https://api.example.com/data")
+  .then(data => console.log(data))
+  .catch(err => console.error(err.message));
+    </pre>
+
+    <p class="note">
+      During the hackathon, you are free to use these as building blocks of a larger project
+      (dashboard, visualizer, API tool, etc.).
+    </p>
+  </div>
+</body>
+</html>
