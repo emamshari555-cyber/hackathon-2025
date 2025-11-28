@@ -1,26 +1,39 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Test Submit</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body style="background:black;color:white;">
+<body style="background:black;color:white;font-family:Arial;">
 
-<h2>Form Test</h2>
+<h2>Firebase Write Test</h2>
+<button id="test">Test Firebase Write</button>
+<p id="status"></p>
 
-<form id="f">
-<input id="a" placeholder="Name" required><br><br>
-<input id="b" placeholder="Email" required><br><br>
-<button>Test Submit</button>
-</form>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+import { getFirestore, addDoc, collection } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
-<p id="s"></p>
+const firebaseConfig = {
+  apiKey: "AIzaSyCVx-gsOca_oPxPhAwqU6-v_OXa7uqgEhY",
+  authDomain: "hackathon-2025-64a07.firebaseapp.com",
+  projectId: "hackathon-2025-64a07"
+};
 
-<script>
-document.getElementById("f").addEventListener("submit", e => {
-  e.preventDefault();
-  document.getElementById("s").innerText = "✅ Form works (JS is fine)";
-});
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+document.getElementById("test").onclick = async () => {
+  document.getElementById("status").innerText = "Testing Firebase...";
+
+  try {
+    await addDoc(collection(db,"debugTest"), {
+      test: "ok",
+      time: new Date().toISOString()
+    });
+
+    document.getElementById("status").innerText = "✅ FIREBASE WRITE SUCCESS";
+  } catch (e) {
+    document.getElementById("status").innerText = "❌ FIREBASE ERROR: " + e.message;
+    console.error(e);
+  }
+};
 </script>
 
 </body>
