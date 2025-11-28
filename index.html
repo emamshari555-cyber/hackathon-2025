@@ -2,16 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Public JavaScript Hackathon 2025</title>
+  <title>JS Hackathon 2025</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    /* === ANIMATIONS & TRANSITIONS (GLOBAL) === */
-
-    html, body {
-      scroll-behavior: smooth;
-    }
+    html, body { scroll-behavior: smooth; }
 
     body {
+      margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: radial-gradient(circle at top, #1d4ed8, #020617);
       color: #e5e7eb;
@@ -20,35 +17,10 @@
       align-items: center;
       justify-content: center;
       padding: 24px;
-
       opacity: 0;
       transform: translateY(10px);
       animation: bodyFadeIn 0.6s ease-out forwards;
     }
-
-    .shell {
-      width: 100%;
-      max-width: 1100px;
-      background: rgba(15,23,42,0.9);
-      border-radius: 24px;
-      border: 1px solid rgba(148,163,184,0.3);
-      box-shadow: 0 30px 80px rgba(15,23,42,0.8);
-      padding: 72px 24px 28px;
-      display: grid;
-      gap: 28px;
-      margin-top: 20px;
-
-      opacity: 0;
-      transform: translateY(12px);
-      animation: panelFloatIn 0.7s ease-out forwards;
-      animation-delay: 0.05s;
-    }
-
-    @media (min-width: 900px) {
-      .shell { grid-template-columns: 2fr 1.5fr; padding: 80px 36px 36px; }
-    }
-
-    a { color: inherit; text-decoration: none; }
 
     .nav {
       position: fixed;
@@ -61,9 +33,8 @@
       align-items: center;
       z-index: 10;
       font-size: 13px;
-
       backdrop-filter: blur(10px);
-      transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+      transition: background 0.2s ease, box-shadow 0.2s ease;
     }
 
     .nav:hover {
@@ -72,16 +43,14 @@
     }
 
     .nav-left { font-weight: 600; font-size: 14px; }
+    a { color: inherit; text-decoration: none; }
 
     .nav-links a {
       margin-left: 12px;
-      text-decoration: none;
-      color: #e5e7eb;
       opacity: 0.8;
       position: relative;
       transition: color 0.2s ease, opacity 0.2s ease;
     }
-
     .nav-links a::after {
       content: "";
       position: absolute;
@@ -92,13 +61,27 @@
       background: linear-gradient(to right, #4f46e5, #22c55e);
       transition: width 0.22s ease;
     }
+    .nav-links a:hover { opacity: 1; }
+    .nav-links a:hover::after { width: 100%; }
 
-    .nav-links a:hover {
-      opacity: 1;
-    }
-
-    .nav-links a:hover::after {
+    .shell {
       width: 100%;
+      max-width: 1100px;
+      background: rgba(15,23,42,0.9);
+      border-radius: 24px;
+      border: 1px solid rgba(148,163,184,0.3);
+      box-shadow: 0 30px 80px rgba(15,23,42,0.8);
+      padding: 80px 24px 28px;
+      display: grid;
+      gap: 28px;
+      margin-top: 20px;
+      opacity: 0;
+      transform: translateY(12px);
+      animation: panelFloatIn 0.7s ease-out forwards;
+      animation-delay: 0.05s;
+    }
+    @media (min-width: 900px) {
+      .shell { grid-template-columns: 2fr 1.5fr; padding: 80px 36px 36px; }
     }
 
     .badge {
@@ -116,23 +99,27 @@
       width: 6px; height: 6px; border-radius: 999px;
       background: #22c55e;
     }
+
     h1 {
       font-size: clamp(28px, 4vw, 38px);
       line-height: 1.1;
       margin-bottom: 10px;
     }
+
     .subtitle {
       font-size: 14px;
       color: #9ca3af;
       max-width: 480px;
       margin-bottom: 24px;
     }
+
     .meta-row {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       margin-bottom: 24px;
     }
+
     .pill {
       padding: 6px 10px;
       border-radius: 999px;
@@ -140,18 +127,19 @@
       font-size: 12px;
       color: #e5e7eb;
     }
+
     .btn-row {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
     }
+
     .btn {
       border-radius: 999px;
       padding: 10px 18px;
       font-size: 14px;
       border: none;
       cursor: pointer;
-      text-decoration: none;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -170,7 +158,6 @@
     .btn-primary:hover {
       transform: translateY(-2px) scale(1.01);
       box-shadow: 0 16px 40px rgba(37,99,235,0.8);
-      opacity: 0.96;
     }
     .btn-secondary {
       background: transparent;
@@ -190,29 +177,29 @@
       color: #9ca3af;
       margin-bottom: 10px;
     }
-    .timeline, .info-list { list-style: none; font-size: 13px; color: #9ca3af; }
-    .timeline li, .info-list li { margin-bottom: 8px; }
-    .timeline span {
-      font-weight: 600;
-      color: #e5e7eb;
-      margin-right: 6px;
+
+    .timeline, .info-list {
+      list-style: none;
+      font-size: 13px;
+      color: #9ca3af;
     }
+    .timeline li, .info-list li { margin-bottom: 8px; }
+    .timeline span { font-weight: 600; color: #e5e7eb; margin-right: 6px; }
+
     .right-card {
       background: radial-gradient(circle at top left, rgba(59,130,246,0.22), transparent),
                   radial-gradient(circle at bottom right, rgba(8,47,73,0.7), #020617);
       border-radius: 18px;
       border: 1px solid rgba(148,163,184,0.4);
       padding: 18px 18px 22px;
-
       opacity: 0;
       transform: translateY(12px);
       animation: panelFloatIn 0.7s ease-out forwards;
       animation-delay: 0.12s;
     }
-    .right-card h2 {
-      font-size: 16px;
-      margin-bottom: 10px;
-    }
+
+    .right-card h2 { font-size: 16px; margin-bottom: 10px; }
+
     .stat-row {
       display: flex;
       flex-wrap: wrap;
@@ -227,22 +214,15 @@
       background: rgba(15,23,42,0.85);
       border: 1px solid rgba(148,163,184,0.4);
       text-align: center;
-
       transition: transform 0.18s ease, box-shadow 0.18s ease;
     }
     .stat:hover {
       transform: translateY(-3px) scale(1.02);
       box-shadow: 0 16px 35px rgba(15,23,42,0.9);
     }
-    .stat .value {
-      font-size: 18px;
-      font-weight: 700;
-      color: #a5b4fc;
-    }
-    .stat .label {
-      font-size: 11px;
-      color: #9ca3af;
-    }
+    .stat .value { font-size: 18px; font-weight: 700; color: #a5b4fc; }
+    .stat .label { font-size: 11px; color: #9ca3af; }
+
     .tag-row {
       display: flex;
       flex-wrap: wrap;
@@ -256,13 +236,13 @@
       border: 1px solid rgba(148,163,184,0.6);
       color: #e5e7eb;
     }
+
     footer {
       margin-top: 18px;
       font-size: 11px;
       color: #6b7280;
     }
 
-    /* === KEYFRAMES === */
     @keyframes bodyFadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -289,17 +269,16 @@
   </nav>
 
   <main class="shell">
-    <!-- LEFT SIDE -->
     <section>
       <div class="badge"><span></span> LIVE • Online JavaScript Hackathon</div>
       <h1>Public JavaScript Hackathon 2025</h1>
       <p class="subtitle">
-        Build innovative JS-based projects in 1 day. Solve real-world problems, sharpen your logic,
-        and showcase your skills to industry mentors.
+        Build innovative JS-based projects in 1 day. Solve real-world problems,
+        sharpen your logic, and showcase your skills to industry mentors.
       </p>
 
       <div class="meta-row">
-        <div class="pill">📅 Tomorrow – 1 Day Sprint</div>
+        <div class="pill">📅 1-Day Sprint</div>
         <div class="pill">🌐 Online</div>
         <div class="pill">👥 Open to All</div>
       </div>
@@ -315,7 +294,7 @@
         <ul class="timeline">
           <li><span>Kickoff:</span> 10:00 AM – Problem statements released</li>
           <li><span>Build:</span> 10:00 AM – 8:00 PM – Coding & project development</li>
-          <li><span>Submission:</span> by 8:00 PM via online portal</li>
+          <li><span>Submission:</span> by 8:00 PM via this portal</li>
           <li><span>Results:</span> Next day, 6:00 PM – winners announced</li>
         </ul>
       </div>
@@ -331,13 +310,12 @@
       </div>
     </section>
 
-    <!-- RIGHT SIDE -->
     <aside class="right-card">
       <h2>What You’ll Gain</h2>
       <div class="stat-row">
         <div class="stat">
           <div class="value">🎓</div>
-          <div class="label">Participation Certificate</div>
+          <div class="label">Certificate</div>
         </div>
         <div class="stat">
           <div class="value">🏆</div>
@@ -345,22 +323,22 @@
         </div>
         <div class="stat">
           <div class="value">🤝</div>
-          <div class="label">Networking & Mentoring</div>
+          <div class="label">Mentoring & Network</div>
         </div>
       </div>
       <p style="font-size:13px;color:#d1d5db;">
-        Submissions are judged on clean code, correct output, problem-solving approach,
-        and clarity of explanation. Shortlisted teams may present their solution live.
+        Submissions are judged on clean code, correct output,
+        problem-solving approach, and clarity of explanation.
       </p>
       <div class="tag-row">
         <div class="tag">Algorithms</div>
         <div class="tag">Data Structures</div>
         <div class="tag">Async JS</div>
-        <div class="tag">Browser APIs</div>
+        <div class="tag">DOM / Browser</div>
       </div>
 
       <footer>
-        Hosted by CGS • Need help? Mail us at youremail@example.com
+        Hosted by CGS • Contact: youremail@example.com
       </footer>
     </aside>
   </main>
