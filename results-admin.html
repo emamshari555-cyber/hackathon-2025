@@ -5,17 +5,41 @@
   <title>Admin – Submissions Viewer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    body { background:#020617; color:#e5e7eb; font-family:system-ui, sans-serif; padding:24px; }
-    h1 { text-align:center; margin-bottom:10px; color:#38bdf8; }
-    table { width:100%; border-collapse:collapse; font-size:12px; }
-    th, td { border:1px solid #1f2937; padding:6px; vertical-align:top; }
-    th { background:#0f172a; }
-    a { color:#38bdf8; }
+    body{
+      margin:0;
+      background:#020617;
+      color:#e5e7eb;
+      font-family:system-ui, sans-serif;
+      padding:24px;
+      opacity:0;
+      transform:translateY(10px);
+      animation:fadeIn .6s ease-out forwards;
+    }
+    @keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+    h1{text-align:center;color:#38bdf8;margin-bottom:8px}
+    p{text-align:center;color:#9ca3af;font-size:13px;margin-bottom:12px}
+    table{
+      width:100%;
+      border-collapse:collapse;
+      font-size:12px;
+      background:#020617;
+      border:1px solid #1f2937;
+      border-radius:16px;
+      overflow:hidden;
+    }
+    th,td{
+      padding:6px;
+      border-bottom:1px solid #1f2937;
+      vertical-align:top;
+    }
+    th{background:#0f172a;}
+    tr:hover{background:#0b1120;}
+    a{color:#38bdf8;}
   </style>
 </head>
 <body>
-  <h1>All Project Submissions (Admin)</h1>
-  <p style="text-align:center;font-size:13px;color:#9ca3af;">This page is not protected, so keep the link private.</p>
+  <h1>All Submissions (Admin)</h1>
+  <p>Keep this URL private. It reads from Firestore collection <code>submissions</code>.</p>
 
   <table id="submissionsTable">
     <thead>
@@ -37,20 +61,12 @@
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-    import {
-      getFirestore,
-      collection,
-      getDocs
-    } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyCVx-gsOca_oPxPhAwqU6-v_OXa7uqgEhY",
       authDomain: "hackathon-2025-64a07.firebaseapp.com",
-      projectId: "hackathon-2025-64a07",
-      storageBucket: "hackathon-2025-64a07.firebasestorage.app",
-      messagingSenderId: "21324756214",
-      appId: "1:21324756214:web:2ba8ecf64544031650a8d7",
-      measurementId: "G-QP9EZ6PX1P"
+      projectId: "hackathon-2025-64a07"
     };
 
     const app = initializeApp(firebaseConfig);
@@ -59,25 +75,30 @@
     const tbody = document.querySelector("#submissionsTable tbody");
 
     async function loadSubmissions() {
-      const qs = await getDocs(collection(db, "submissions"));
-      tbody.innerHTML = "";
-      qs.forEach(doc => {
-        const d = doc.data();
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td>${d.teamName || ""}</td>
-          <td>${d.leaderName || ""}</td>
-          <td>${d.email || ""}</td>
-          <td>${d.college || ""}</td>
-          <td>${d.projectTitle || ""}</td>
-          <td>${d.codeLink ? `<a href="${d.codeLink}" target="_blank">Code</a>` : ""}</td>
-          <td>${d.demoLink ? `<a href="${d.demoLink}" target="_blank">Demo</a>` : ""}</td>
-          <td>${d.description || ""}</td>
-          <td>${d.techStack || ""}</td>
-          <td>${d.submittedAt || ""}</td>
-        `;
-        tbody.appendChild(tr);
-      });
+      try {
+        const snap = await getDocs(collection(db, "submissions"));
+        tbody.innerHTML = "";
+        snap.forEach(doc => {
+          const d = doc.data();
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${d.teamName || ""}</td>
+            <td>${d.leaderName || ""}</td>
+            <td>${d.email || ""}</td>
+            <td>${d.college || ""}</td>
+            <td>${d.projectTitle || ""}</td>
+            <td>${d.codeLink ? `<a href="${d.codeLink}" target="_blank">Code</a>` : ""}</td>
+            <td>${d.demoLink ? `<a href="${d.demoLink}" target="_blank">Demo</a>` : ""}</td>
+            <td>${d.description || ""}</td>
+            <td>${d.techStack || ""}</td>
+            <td>${d.submittedAt || d.time || ""}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+      } catch (e) {
+        console.error(e);
+        tbody.innerHTML = "<tr><td colspan='10'>Error loading submissions. Check console.</td></tr>";
+      }
     }
 
     loadSubmissions();
