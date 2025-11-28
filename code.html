@@ -1,45 +1,137 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Online Code Playground</title>
+  <meta charset="UTF-8" />
+  <title>JS Playground – Hackathon</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    body { font-family: Arial; background: #0f172a; padding: 30px; color:#e5e7eb; }
-    .box { background: #020617; padding: 20px; border-radius: 8px; max-width: 900px; margin: auto; }
-    h1 { color: #38bdf8; }
-    textarea { width: 100%; height: 260px; background:#020617; color:#e5e7eb; border:1px solid #334155; outline:none; }
-    #output { background: #020617; border: 1px solid #334155; padding: 10px; min-height: 120px; white-space: pre-wrap; margin-top:10px; }
-    button { padding: 10px 14px; background: #22c55e; color: black; border: none; border-radius: 5px; margin-top:10px; cursor:pointer; }
+    body{
+      margin:0;
+      background:#020617;
+      color:#e5e7eb;
+      font-family:system-ui, sans-serif;
+      padding:24px;
+      opacity:0;
+      transform:translateY(10px);
+      animation:fadeIn .6s ease-out forwards;
+    }
+    @keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+    .nav{
+      padding:10px 24px;
+      background:#020617;
+      border-bottom:1px solid #1f2937;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin:-24px -24px 24px;
+      position:sticky;top:0;z-index:5;
+    }
+    a{color:#38bdf8;text-decoration:none;font-size:13px;margin-left:10px}
+    .box{
+      max-width:1000px;
+      margin:0 auto;
+      background:#020617;
+      border:1px solid #1f2937;
+      border-radius:16px;
+      padding:20px;
+    }
+    textarea{
+      width:100%;
+      background:#020617;
+      color:#e5e7eb;
+      border:1px solid #334155;
+      border-radius:6px;
+      padding:8px;
+      font-family:monospace;
+      font-size:13px;
+    }
+    #output{
+      background:#020617;
+      border:1px solid #334155;
+      border-radius:6px;
+      padding:10px;
+      min-height:100px;
+      margin-top:10px;
+      font-family:monospace;
+      font-size:13px;
+      white-space:pre-wrap;
+    }
+    button{
+      padding:8px 14px;
+      border-radius:999px;
+      border:none;
+      background:#22c55e;
+      color:#020617;
+      font-size:13px;
+      margin-top:10px;
+      margin-right:8px;
+      cursor:pointer;
+      transition:.18s;
+    }
+    button:hover{transform:translateY(-1px) scale(1.02);}
   </style>
 </head>
 <body>
+  <div class="nav">
+    <div>JS Hackathon 2025</div>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="registration.html">Register</a>
+      <a href="problems.html">Problems</a>
+      <a href="code.html">Playground</a>
+      <a href="submit.html">Submit</a>
+      <a href="results.html">Results</a>
+    </div>
+  </div>
+
   <div class="box">
-    <h1>Online JavaScript Playground</h1>
-    <p>Write JavaScript and click Run:</p>
+    <h2>Online JavaScript Playground</h2>
+    <p style="font-size:13px;color:#9ca3af;">Use <code>input</code> variable in your code. Example: <code>JSON.parse(input)</code></p>
 
-    <textarea id="code">// example
-console.log("Hello Hackathon");</textarea>
-    <br>
-    <button onclick="runCode()">Run Code</button>
+    <p><b>Input</b></p>
+    <textarea id="input" rows="4">[1,2,3,2,4,3,5]</textarea>
 
-    <h3>Output:</h3>
+    <p style="margin-top:10px;"><b>Code</b></p>
+    <textarea id="code" rows="12">
+// Example: unique count
+function uniqueCount(arr) {
+  return new Set(arr).size;
+}
+
+let data = JSON.parse(input);
+console.log("Unique count:", uniqueCount(data));
+    </textarea>
+
+    <div>
+      <button onclick="runCode()">Run</button>
+      <button onclick="clearOutput()">Clear Output</button>
+    </div>
+
+    <h3 style="margin-top:10px;">Output</h3>
     <div id="output"></div>
   </div>
 
   <script>
     function runCode() {
-      const code = document.getElementById("code").value;
-      const output = document.getElementById("output");
-      output.textContent = "";
+      const inputVal = document.getElementById("input").value;
+      const codeVal = document.getElementById("code").value;
+      const out = document.getElementById("output");
+      out.textContent = "";
+
       try {
-        const log = console.log;
+        const originalLog = console.log;
         console.log = (...args) => {
-          output.textContent += args.join(" ") + "\n";
+          out.textContent += args.join(" ") + "\n";
         };
-        new Function(code)();
-        console.log = log;
+        new Function("input", codeVal)(inputVal);
+        console.log = originalLog;
       } catch (e) {
-        output.textContent = "Error: " + e.message;
+        out.textContent = "Error: " + e.message;
       }
+    }
+
+    function clearOutput() {
+      document.getElementById("output").textContent = "";
     }
   </script>
 </body>
