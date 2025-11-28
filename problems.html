@@ -2,150 +2,58 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>JavaScript Hackathon Problems</title>
+  <title>JS Hackathon Problems</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-  /* === GLOBAL ANIMATIONS & TRANSITIONS === */
-
-html, body {
-  scroll-behavior: smooth;
-}
-
-/* Fade the whole page in smoothly */
-body {
-  opacity: 0;
-  transform: translateY(10px);
-  animation: bodyFadeIn 0.6s ease-out forwards;
-}
-
-/* Main panels (cards / shells / boxes) will softly float in */
-.shell,
-.card,
-.box,
-.right-card {
-  opacity: 0;
-  transform: translateY(12px);
-  animation: panelFloatIn 0.7s ease-out forwards;
-  animation-delay: 0.05s;
-}
-
-/* Sub panels / tables / lists can use this class if you want */
-.soft-appear {
-  opacity: 0;
-  transform: translateY(8px);
-  animation: softAppear 0.6s ease-out forwards;
-  animation-delay: 0.15s;
-}
-
-/* Buttons with smooth hover + press */
-.btn,
-button {
-  transition:
-    transform 0.18s ease,
-    box-shadow 0.18s ease,
-    background 0.22s ease,
-    opacity 0.18s ease;
-}
-
-.btn:hover,
-button:hover {
-  transform: translateY(-2px) scale(1.01);
-  box-shadow: 0 14px 35px rgba(15,23,42,0.6);
-}
-
-.btn:active,
-button:active {
-  transform: translateY(0) scale(0.99);
-  box-shadow: 0 6px 15px rgba(15,23,42,0.7);
-}
-
-/* Nav bar subtle hover */
-.nav {
-  backdrop-filter: blur(10px);
-  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
-}
-
-.nav:hover {
-  background: rgba(15,23,42,0.98);
-  box-shadow: 0 14px 40px rgba(15,23,42,0.8);
-}
-
-/* Links hover */
-.nav-links a {
-  position: relative;
-  transition: color 0.2s ease, opacity 0.2s ease;
-}
-
-.nav-links a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-  width: 0;
-  height: 2px;
-  background: linear-gradient(to right, #4f46e5, #22c55e);
-  transition: width 0.22s ease;
-}
-
-.nav-links a:hover::after {
-  width: 100%;
-}
-
-/* Tables / rows subtle hover (for results/admin pages) */
-table tr {
-  transition: background 0.18s ease, transform 0.15s ease;
-}
-
-table tr:hover {
-  background: rgba(15,23,42,0.9);
-  transform: translateY(-1px);
-}
-
-/* ==== KEYFRAMES ==== */
-
-@keyframes bodyFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes panelFloatIn {
-  0% {
-    opacity: 0;
-    transform: translateY(16px) scale(0.98);
-  }
-  60% {
-    opacity: 1;
-    transform: translateY(-2px) scale(1.01);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes softAppear {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
+    body {
+      margin:0;
+      background:#020617;
+      color:#e5e7eb;
+      font-family:system-ui, sans-serif;
+      padding:24px;
+      opacity:0;
+      transform:translateY(10px);
+      animation:fadeIn .6s ease-out forwards;
+    }
+    @keyframes fadeIn {
+      from{opacity:0;transform:translateY(10px);}
+      to{opacity:1;transform:translateY(0);}
+    }
+    .nav{
+      padding:10px 24px;
+      background:#020617;
+      border-bottom:1px solid #1f2937;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin:-24px -24px 24px;
+      position:sticky;top:0;z-index:5;
+    }
+    a{color:#38bdf8;text-decoration:none;font-size:13px;margin-left:10px}
+    .box{
+      max-width:900px;margin:0 auto;
+      background:#020617;
+      border-radius:16px;
+      border:1px solid #1f2937;
+      padding:20px;
+    }
+    h1{color:#38bdf8;margin-bottom:8px}
+    h2{margin-top:18px;margin-bottom:4px}
+    p{font-size:14px;color:#d1d5db}
+    pre{
+      background:#000;
+      padding:10px;
+      color:#22c55e;
+      border-radius:6px;
+      overflow-x:auto;
+      font-size:13px;
+    }
   </style>
 </head>
 <body>
-  <nav class="nav">
+  <div class="nav">
     <div>JS Hackathon 2025</div>
-    <div class="nav-links">
+    <div>
       <a href="index.html">Home</a>
       <a href="registration.html">Register</a>
       <a href="problems.html">Problems</a>
@@ -153,20 +61,14 @@ table tr:hover {
       <a href="submit.html">Submit</a>
       <a href="results.html">Results</a>
     </div>
-  </nav>
+  </div>
 
   <div class="box">
     <h1>JavaScript Problem Set</h1>
-    <p class="note">
-      You can use these problems as part of your project or as standalone coding tasks.
-      Try solving them in the <a href="code.html">Online Code Playground</a>.
-    </p>
+    <p>Use the <a href="code.html">Playground</a> to test your solutions.</p>
 
     <h2>Problem 1: Unique Values Counter</h2>
-    <p>
-      Given an array of numbers, return the number of <b>unique</b> values.
-    </p>
-    <p><b>Example:</b></p>
+    <p>Given an array of numbers, return the number of unique values.</p>
     <pre>
 // Input:
 [1, 2, 3, 2, 4, 3, 5]
@@ -174,13 +76,9 @@ table tr:hover {
 // Output:
 5
     </pre>
-    <p class="note">Hint: You can use a Set in JavaScript.</p>
 
     <h2>Problem 2: Student Topper</h2>
-    <p>
-      You are given an array of student objects, each having <code>name</code> and <code>marks</code>.<br />
-      Return the <b>name of the student</b> who has the highest marks.
-    </p>
+    <p>Return the name of the student with the highest marks.</p>
     <pre>
 // Input:
 [
@@ -194,11 +92,7 @@ table tr:hover {
     </pre>
 
     <h2>Problem 3: String Compression</h2>
-    <p>
-      Given a string consisting of lowercase letters, compress it by replacing each group of
-      repeating characters with the character followed by the count of repetitions.
-    </p>
-    <p><b>Example:</b></p>
+    <p>Compress a string: "aaabbc" → "a3b2c1".</p>
     <pre>
 // Input:
 "aaabbc"
@@ -208,23 +102,7 @@ table tr:hover {
     </pre>
 
     <h2>Problem 4: Async Fetch Wrapper (Advanced)</h2>
-    <p>
-      Write an async function <code>fetchJson(url)</code> that:
-      <br />• fetches data from the given URL<br />
-      • returns parsed JSON on success<br />
-      • throws an error with message <code>"Request failed"</code> if response is not ok
-    </p>
-    <pre>
-// Example usage:
-fetchJson("https://api.example.com/data")
-  .then(data => console.log(data))
-  .catch(err => console.error(err.message));
-    </pre>
-
-    <p class="note">
-      During the hackathon, you are free to use these as building blocks of a larger project
-      (dashboard, visualizer, API tool, etc.).
-    </p>
+    <p>Write async function <code>fetchJson(url)</code> that loads JSON and throws <code>"Request failed"</code> on error.</p>
   </div>
 </body>
 </html>
