@@ -1,40 +1,217 @@
 <!DOCTYPE html>
-<html>
-<body style="background:black;color:white;font-family:Arial;">
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Project Submission – Hackathon</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #0f172a, #020617);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #e5e7eb;
+    }
+    .card {
+      width: 95%;
+      max-width: 720px;
+      background: rgba(15, 23, 42, 0.97);
+      border-radius: 18px;
+      padding: 24px 24px 20px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      backdrop-filter: blur(16px);
+      transform: translateY(14px);
+      opacity: 0;
+      animation: slideUp .6s ease-out forwards;
+    }
+    @keyframes slideUp { to { transform: translateY(0); opacity: 1; } }
+    h1 {
+      margin: 0 0 4px;
+      font-size: 1.6rem;
+    }
+    p.sub {
+      margin: 0 0 20px;
+      font-size: .88rem;
+      color: #9ca3af;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px 18px;
+    }
+    label {
+      display: block;
+      font-size: .78rem;
+      margin-bottom: 4px;
+      color: #cbd5f5;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 9px 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      background: rgba(15, 23, 42, 0.88);
+      color: #e5e7eb;
+      outline: none;
+      font-size: .88rem;
+      resize: vertical;
+      min-height: 40px;
+      transition: border-color .15s, box-shadow .15s, transform .12s;
+    }
+    input:focus, textarea:focus {
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.4);
+      transform: translateY(-1px);
+    }
+    textarea {
+      min-height: 80px;
+    }
+    .btn-row {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+    }
+    button {
+      border: none;
+      cursor: pointer;
+      padding: 9px 20px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: .9rem;
+      background: linear-gradient(135deg, #6366f1, #0ea5e9);
+      color: white;
+      box-shadow: 0 18px 35px rgba(79, 70, 229, .45);
+      transition: transform .12s, box-shadow .12s, opacity .12s;
+    }
+    button:disabled {
+      opacity: .6;
+      box-shadow: none;
+      cursor: default;
+    }
+    button:not(:disabled):hover {
+      transform: translateY(-1px);
+      box-shadow: 0 22px 45px rgba(59, 130, 246, .55);
+    }
+    .status {
+      margin-left: 10px;
+      font-size: .8rem;
+    }
+    .status.ok { color: #4ade80; }
+    .status.err { color: #fb7185; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Submit Your Project</h1>
+    <p class="sub">
+      One submission per team. Ensure links are correct – judges will use this for evaluation.
+    </p>
 
-<h2>Firebase Write Test</h2>
-<button id="test">Test Firebase Write</button>
-<p id="status"></p>
+    <form id="subForm">
+      <div class="grid">
+        <div>
+          <label for="teamName">Team Name *</label>
+          <input id="teamName" required />
+        </div>
+        <div>
+          <label for="leaderName">Team Leader Name *</label>
+          <input id="leaderName" required />
+        </div>
+        <div>
+          <label for="email">Leader Email *</label>
+          <input id="email" type="email" required />
+        </div>
+        <div>
+          <label for="phone">Leader Phone / WhatsApp *</label>
+          <input id="phone" required />
+        </div>
+        <div>
+          <label for="college">College / Organization *</label>
+          <input id="college" required />
+        </div>
+        <div>
+          <label for="projectTitle">Project Title *</label>
+          <input id="projectTitle" required />
+        </div>
+        <div>
+          <label for="codeLink">GitHub / Code Repo Link *</label>
+          <input id="codeLink" required />
+        </div>
+        <div>
+          <label for="demoLink">Live Demo / Video Link (optional)</label>
+          <input id="demoLink" />
+        </div>
+      </div>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-import { getFirestore, addDoc, collection } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+      <div style="margin-top: 14px;">
+        <label for="description">Short Project Description *</label>
+        <textarea id="description" required></textarea>
+      </div>
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCVx-gsOca_oPxPhAwqU6-v_OXa7uqgEhY",
-  authDomain: "hackathon-2025-64a07.firebaseapp.com",
-  projectId: "hackathon-2025-64a07"
-};
+      <div style="margin-top: 10px;">
+        <label for="techStack">Tech Stack (comma separated)</label>
+        <input id="techStack" placeholder="e.g., HTML, CSS, JavaScript, Firebase" />
+      </div>
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+      <div class="btn-row">
+        <button type="submit" id="subBtn">Submit Project</button>
+        <span id="subStatus" class="status"></span>
+      </div>
+    </form>
+  </div>
 
-document.getElementById("test").onclick = async () => {
-  document.getElementById("status").innerText = "Testing Firebase...";
+  <script>
+    const API_BASE = "http://localhost:4000"; // change after deployment
 
-  try {
-    await addDoc(collection(db,"debugTest"), {
-      test: "ok",
-      time: new Date().toISOString()
+    const form = document.getElementById("subForm");
+    const statusEl = document.getElementById("subStatus");
+    const btn = document.getElementById("subBtn");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      statusEl.textContent = "Submitting...";
+      statusEl.className = "status";
+      btn.disabled = true;
+
+      const payload = {
+        teamName:     document.getElementById("teamName").value.trim(),
+        leaderName:   document.getElementById("leaderName").value.trim(),
+        email:        document.getElementById("email").value.trim(),
+        phone:        document.getElementById("phone").value.trim(),
+        college:      document.getElementById("college").value.trim(),
+        projectTitle: document.getElementById("projectTitle").value.trim(),
+        codeLink:     document.getElementById("codeLink").value.trim(),
+        demoLink:     document.getElementById("demoLink").value.trim(),
+        description:  document.getElementById("description").value.trim(),
+        techStack:    document.getElementById("techStack").value.trim()
+      };
+
+      try {
+        const res  = await fetch(`${API_BASE}/api/submit`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (!res.ok || !data.success) {
+          throw new Error(data.message || "Server error");
+        }
+        statusEl.textContent = "Project submitted successfully ✅";
+        statusEl.classList.add("ok");
+        form.reset();
+      } catch (err) {
+        console.error(err);
+        statusEl.textContent = "Failed: " + err.message;
+        statusEl.classList.add("err");
+      } finally {
+        btn.disabled = false;
+      }
     });
-
-    document.getElementById("status").innerText = "✅ FIREBASE WRITE SUCCESS";
-  } catch (e) {
-    document.getElementById("status").innerText = "❌ FIREBASE ERROR: " + e.message;
-    console.error(e);
-  }
-};
-</script>
-
+  </script>
 </body>
 </html>
